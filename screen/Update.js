@@ -1,4 +1,4 @@
-import { View, Text,TextInput,StyleSheet,Pressable } from 'react-native'
+import { View, Text,TextInput,StyleSheet,Pressable,ScrollView } from 'react-native'
 import {firebase} from '../firebase-config'
 import { useNavigation } from '@react-navigation/native'
 import React,{useState} from 'react' 
@@ -13,6 +13,8 @@ const Update = ({route}) => {
     const [textName,onChangeNameText]=useState(route.params.item.name);
     const [textEmail,onChangeEmailText]=useState(route.params.item.email);
     const [textPhone,onChangePhoneText]=useState(route.params.item.phone);
+    const [textMajors,onChangeMajorsText]=useState(route.params.item.Majors);
+    const [textGraduationYear,onChangeGraduationYearText]=useState(route.params.item.GraduationYear);
     const navigation = useNavigation();
 
     const updateTodo = () => {
@@ -24,8 +26,10 @@ const Update = ({route}) => {
                 name: textName,
                 email:textEmail,
                 phone:textPhone,
+                Majors:textMajors,
+                GraduationYear:textGraduationYear,
             }).then( () => {
-                navigation.navigate('Home')
+                navigation.navigate('HomeAdmin')
             }).catch((error)=>{
                 alert(error.message)
             })
@@ -33,6 +37,7 @@ const Update = ({route}) => {
     }
 
   return (
+    <ScrollView>
     <View>
       <View style={styles.container}>
         <View>
@@ -76,7 +81,29 @@ const Update = ({route}) => {
            style={styles.input}
           onChangeText={onChangePhoneText}
           value={textPhone}
-          placeholder="update"
+          placeholder="phone"
+          />
+        </View>
+        <View>
+          <Text  style={styles.titleInput}>
+          <AntDesign name="deleteuser" size={24} color="black" /> 
+          </Text>
+          <TextInput
+           style={styles.input}
+          onChangeText={onChangeMajorsText}
+          value={textMajors}
+          placeholder="Majors"
+          />
+        </View>
+        <View>
+          <Text  style={styles.titleInput}>
+          <FontAwesome name="graduation-cap" size={24} color="black" />  
+          </Text>
+          <TextInput
+           style={styles.input}
+          onChangeText={onChangeGraduationYearText}
+          value={textGraduationYear}
+          placeholder="Graduation Year"
           />
         </View>
         </View>
@@ -94,6 +121,7 @@ const Update = ({route}) => {
       </Pressable>
       </View>
     </View>
+    </ScrollView>
   )
 }
 

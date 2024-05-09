@@ -256,13 +256,15 @@ const HomeScreenAdmin  = () => {
             querySnapshot =>{
                 const todos=[]
                 querySnapshot.forEach((doc) =>{
-                    const {heading,name,email,phone} = doc.data()
+                    const {heading,name,email,phone,Majors,GraduationYear} = doc.data()
                     todos.push({
                         id: doc.id,
                         heading,
                         name,
                         email,
                         phone,
+                        Majors,
+                        GraduationYear,
                     })
                 })
                 setTodos(todos)
@@ -314,7 +316,7 @@ const HomeScreenAdmin  = () => {
         }
         if(item.name.toLowerCase().includes(search.toLowerCase())){
             return(
-                <View>
+                <View >
                      <View style={styles.InformationIlumni}>
                     <View style={styles.InformationIlumni1} >
                         <Pressable
@@ -402,45 +404,7 @@ const HomeScreenAdmin  = () => {
 
 
 
-        {/* <FlatList
-                data={todos}
-                numColumns={2}
-                renderItem={({item})=>(
-                    <View style={styles.InformationIlumni}>
-                    <View style={styles.InformationIlumni1} >
-                        <Pressable
-                        onPress={() => navigation.navigate('Update',{item})}
-                        >
-                     
-                     <MaterialIcons style={styles.iconview} name="preview" size={24} color="black" 
-                            onPress={() => navigation.navigate('Update',{item})}
-                     />
-                       <View style={styles.innerContainerShow}>
-                       <FontAwesome name="file-image-o" size={40} color="black" />
-                            <Text style={styles.itemHeading}>
-                            {item.heading[0].toUpperCase() + item.heading.slice(1)}
-                             </Text>                           
-                             <Text style={styles.itemName}>
-                            {item.name[0].toUpperCase() + item.name.slice(1)}
-                             </Text>
-                             <Text style={styles.itemName}>
-                            {item.email[0].toUpperCase() + item.email.slice(1)}
-                             </Text>
-                             <Text style={styles.itemName}>
-                            {item.phone[0].toUpperCase() + item.phone.slice(1)}
-                             </Text>
-                        </View>
-                        <FontAwesome
-                            name='trash-o'
-                            color='red'
-                            onPress={() => deleteTodo(item)}
-                            style={styles.iconDelete}
-                        />
-                        </Pressable>
-                    </View>
-                    </View>
-                )}
-            /> */}
+       
     </View>
   )
 }
@@ -458,6 +422,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         flexDirection:'column',
         marginLeft:15,
+        marginBottom:15,
     },
     titleInput:{
         textAlign: 'left',

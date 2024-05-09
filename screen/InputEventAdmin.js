@@ -1,4 +1,4 @@
-import { View,Text,FlatList,TextInput,StyleSheet,TouchableOpacity,Keyboard,Pressable,Image,ScrollView} from 'react-native'
+import { View,Text,FlatList,TextInput,StyleSheet,TouchableOpacity,Keyboard,Pressable,Image,ScrollView,} from 'react-native'
 import React,{useState,useEffect} from 'react' 
 import {firebase} from '../firebase-config'
 import { FontAwesome } from '@expo/vector-icons'
@@ -8,15 +8,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 
 
-const DetailsScreen = () => {
-    const [todos,setTodos]=useState([]);
-    const todoRef =firebase.firestore().collection('todos');
+const InputEventAdmin = () => {
+    const [eventAlumni,seteventAlumni]=useState([]);
+    
+    const todoRef =firebase.firestore().collection('eventAlumni');
     const [addData,setAddData]=useState('');
     const [addDataName,setAddDataName]=useState('');
     const [addDataEmail,setAddDataEmail]=useState('');
     const [addDataPhone,setAddDataPhone]=useState('');
-    const [addDataMajors,setAddDataMajors]=useState('');
-    const [addDataGraduationYear,setAddDataGraduationYear]=useState('');
     const navigation = useNavigation();
  
     // fetch data
@@ -25,20 +24,18 @@ const DetailsScreen = () => {
         .orderBy('cretedAt','desc')
         .onSnapshot(
             querySnapshot =>{
-                const todos=[]
+                const eventAlumni=[]
                 querySnapshot.forEach((doc) =>{
-                    const {heading,name,email,phone,Majors,GraduationYear} = doc.data()
-                    todos.push({
+                    const {heading,name,email,phone} = doc.data()
+                    eventAlumni.push({
                         id: doc.id,
                         heading,
                         name,
                         email,
                         phone,
-                        Majors,
-                        GraduationYear,
                     })
                 })
-                setTodos(todos)
+                seteventAlumni(eventAlumni)
             }
         )
     },[])
@@ -55,8 +52,6 @@ const DetailsScreen = () => {
                 name:addDataName,
                 email:addDataEmail,
                 phone:addDataPhone,
-                Majors:addDataMajors,
-                GraduationYear:addDataGraduationYear,
                 cretedAt:timestamp
             };
             todoRef
@@ -66,29 +61,34 @@ const DetailsScreen = () => {
                 setAddDataName('')
                 setAddDataEmail('')
                 setAddDataPhone('')
-                setAddDataMajors('')
-                setAddDataGraduationYear('')
                 Keyboard.dismiss();
                 alert('Done')
+
             })
             .catch(error =>{
                 alert(error);
+                
             })
         }
     }
 
     return(
         <View >
-            <ScrollView >
+            <ScrollView>
             <View style={styles.container}>
                 <View>
+                <View style={{width:"10%",}}>
+                        <AntDesign name="back" size={24} color="black"
+                    onPress={() => navigation.navigate('DetailsAdmin')}
+                    />
+                  </View>
                     <Text  style={styles.titleInput}>
-                        <AntDesign name="idcard" size={24} color="black" />
+                    <Ionicons name="today" size={24} color="black" />
                     </Text>
                     
                     <TextInput
                     style={styles.input}
-                    placeholder="ID"
+                    placeholder="Date"
                     placeholderTextColor='#aaaaaa'
                     onChangeText={(heading) => setAddData(heading)}
                     value={addData}
@@ -98,12 +98,12 @@ const DetailsScreen = () => {
                  </View>
                  <View>
                 <Text style={styles.titleInput}>
-                <Ionicons name="person" size={24} color="black" />
+                <MaterialIcons name="title" size={24} color="black" />
                     
                 </Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="name"
+                    placeholder="Title"
                     placeholderTextColor='#aaaaaa'
                     onChangeText={(name) => setAddDataName(name)}
                     value={addDataName}
@@ -113,11 +113,14 @@ const DetailsScreen = () => {
                  </View>
                  <View>
                 <Text  style={styles.titleInput}>
-               <MaterialIcons name="email" size={24} color="black" />
+                <MaterialIcons name="details" size={24} color="black" />
                  </Text>
                 <TextInput
-                    style={styles.input}
-                    placeholder="Email"
+                    style={styles.inputDetail}
+                    editable
+                    multiline
+                    numberOfLines={4}
+                    placeholder="Detail"
                     placeholderTextColor='#aaaaaa'
                     onChangeText={(email) => setAddDataEmail(email)}
                     value={addDataEmail}
@@ -127,10 +130,10 @@ const DetailsScreen = () => {
                  </View>
                  <View>
                 <Text  style={styles.titleInput}>
-                    <FontAwesome name="phone" size={24} color="black" />     </Text>
+                <Ionicons name="people-circle-sharp" size={24} color="black" />    </Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Phone number"
+                    placeholder="By"
                     placeholderTextColor='#aaaaaa'
                     onChangeText={(phone) => setAddDataPhone(phone)}
                     value={addDataPhone}
@@ -138,48 +141,25 @@ const DetailsScreen = () => {
                     autoCapitalize='none'
                 />
                  </View>
-                 <View>
-                <Text  style={styles.titleInput}>
-                <AntDesign name="deleteuser" size={24} color="black" />   </Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Majors"
-                    placeholderTextColor='#aaaaaa'
-                    onChangeText={(Majors) => setAddDataMajors(Majors)}
-                    value={addDataMajors}
-                    underlineColorAndroid='transparent'
-                    autoCapitalize='none'
-                />
-                 </View>
-                 <View>
-                <Text  style={styles.titleInput}>
-                <FontAwesome name="graduation-cap" size={24} color="black" />   </Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Graduation Year"
-                    placeholderTextColor='#aaaaaa'
-                    onChangeText={(GraduationYear) => setAddDataGraduationYear(GraduationYear)}
-                    value={addDataGraduationYear}
-                    underlineColorAndroid='transparent'
-                    autoCapitalize='none'
-                />
-                 </View>
                 <View style={styles.buttonAdd}>
-                <TouchableOpacity onPress={addTodo}  style={styles.buttonAdd1}>
+                <TouchableOpacity onPress={addTodo}   style={styles.buttonAdd1}>
                     <Text>
                         ADD
                     </Text>
                 </TouchableOpacity>
                 </View>
             </View>
+
             </ScrollView>
+          
+           
 
         </View>
     )
 }
 
 
-export default DetailsScreen
+export default InputEventAdmin
 
 const styles = StyleSheet.create({
     container:{
@@ -199,6 +179,13 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     input:{
+        width:'100%',
+        backgroundColor: '#eee',
+        borderRadius: 5,
+        padding: 20,
+        marginBottom:5,
+    },
+    inputDetail:{
         width:'100%',
         backgroundColor: '#eee',
         borderRadius: 5,

@@ -312,8 +312,6 @@
 // });
 
 
-
-
 import { View,Text,FlatList,TextInput,StyleSheet,TouchableOpacity,Keyboard,Pressable,Image,Dimensions} from 'react-native'
 import React,{useState,useEffect} from 'react' 
 import {firebase} from '../firebase-config'
@@ -378,10 +376,8 @@ const Home = () => {
                    marginHorizontal:20,
                    marginBottom:10,
                }}>
-        <View style={{width:"10%",}}>
-            <AntDesign name="addfile" size={24} color="black" 
-                    onPress={() => navigation.navigate('DetailsAdmin')}
-            />
+        <View style={{textAlign:'center'}}>
+               <Text> WELLCOME ALUMNI</Text>
         </View>
         <View style={styles.view}>
             {/* <SearchBar
@@ -408,7 +404,7 @@ const Home = () => {
                     <View style={styles.InformationIlumni}>
                     <View style={styles.InformationIlumni1} >
                         <Pressable
-                        onPress={() => navigation.navigate('DetailsEvent',{item})}
+                        onPress={() => navigation.navigate('EventUpdate',{item})}
                         >
                      
                      <MaterialIcons style={styles.iconview} name="preview" size={24} color="black" 
@@ -432,12 +428,7 @@ const Home = () => {
                             {item.phone[0].toUpperCase() + item.phone.slice(1)}
                              </Text>
                         </View>
-                        <FontAwesome
-                            name='trash-o'
-                            color='red'
-                            onPress={() => deleteTodo(item)}
-                            style={styles.iconDelete}
-                        />
+                    
                         </Pressable>
                     </View>
                     </View>
@@ -460,6 +451,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         flexDirection:'column',
         marginLeft:15,
+        marginBottom:15,
     },
     titleInput:{
         textAlign: 'left',

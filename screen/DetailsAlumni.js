@@ -17,6 +17,10 @@ const DetailsAlumni = ({route}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.Iconday}>
+        <AntDesign  name="back" size={24} color="black"
+        onPress={() => navigation.navigate('HomeAdmin')} />
+        </View>
        <Text style={styles.profile}>
           PROFILE
       </Text>
@@ -60,21 +64,30 @@ const DetailsAlumni = ({route}) => {
         </Text>
   
       </View>
+      <View style={styles.FormID}>
+        <View style={styles.FormIDIcon}>
+        <AntDesign name="deleteuser" size={24} color="black" /> 
+        </View>
+        <Text style={styles.athur}>
+          {route.params.item.Majors}
+        </Text>
+  
+      </View>
+      <View style={styles.FormID}>
+        <View style={styles.FormIDIcon}>
+        <FontAwesome name="graduation-cap" size={24} color="black" /> 
+        </View>
+        <Text style={styles.athur}>
+          {route.params.item.GraduationYear}
+        </Text>
+  
+      </View>
 
     
     
     
       <View style={styles.buttonAdd}>
-      <Pressable
-      
-      onPress={() => navigation.navigate('Home')}
-        style={styles.buttonAdd1}
-      >
-      <Text >
-          Back
-      </Text>
 
-      </Pressable>
       </View>
     </View>
   )
@@ -147,5 +160,9 @@ FormID:{
 FormIDIcon:{
   margin:10,
 },
+Iconday:{
+  padding:20,
+},
+
 
 });

@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';  
 
-const EventUpdate = ({route}) => {
+const EventAlumniDetail = ({route}) => {
     const todoRef =firebase.firestore().collection('eventAlumni');
  const navigation = useNavigation();
 
@@ -21,7 +21,7 @@ const EventUpdate = ({route}) => {
 <View style={styles.titleday}>
   <View style={styles.Iconday}>
     <AntDesign  name="back" size={24} color="black"
-    onPress={() => navigation.navigate('Home')} />
+    onPress={() => navigation.navigate('DetailsAdmin')} />
   </View>
     <Text style={styles.day}>
       {route.params.item.heading}
@@ -54,7 +54,7 @@ written by:{route.params.item.phone}
   )
 }
 
-export default EventUpdate
+export default EventAlumniDetail
 
 const styles = StyleSheet.create({
   container:{

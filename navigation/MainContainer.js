@@ -18,6 +18,8 @@ import Update from '../screen/Update';
 import DetailsEvent from '../screen/DetailsEvent';
 import EventUpdate from '../screen/EventUpdate';
 import DetailsAlumni from '../screen/DetailsAlumni';
+import InputEventAdmin from '../screen/InputEventAdmin';
+import EventAlumniDetail from '../screen/EventAlumniDetail';
 
 
 
@@ -135,7 +137,8 @@ export default function MainContainer() {
       <Stack.Screen name="DetailsEvent" component={DetailsEvent}/>
       <Stack.Screen name="EventUpdate" component={EventUpdate}/>
       <Stack.Screen name="DetailsAlumni" component={DetailsAlumni}/>
-
+      <Stack.Screen name="InputEventAdmin" component={InputEventAdmin}/>
+      <Stack.Screen name="EventAlumniDetail" component={EventAlumniDetail}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

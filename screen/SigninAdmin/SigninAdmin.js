@@ -42,6 +42,15 @@ const SigninAdmin = () => {
       console.log(error)
     })
   }
+  const handleSignIn1= () =>{
+    if (username == 'Admin'&& password =='311000'){
+      navigation.navigate('tabbAdmin')
+    }
+    else {
+      Alert.alert('enter again')
+    }
+  }
+  
 
   const onSignInPressed = () =>{
     navigation.navigate('tabbAdmin');
@@ -85,7 +94,7 @@ const SigninAdmin = () => {
           />
         </View>
 
-        <CustomButton onPress={handleSignIn} text="Sign In" /> 
+        <CustomButton onPress={handleSignIn1} text="Sign In" /> 
 
 
       
